@@ -7,7 +7,8 @@ import xmltodict
 
 
 login = raw_input("Login: ")
-passwd = getpass.getpass('Senha: ')
+passwd = getpass.getpass('Password: ')
+destination = raw_input("Address to call: ")
 
 print "Abrindo arquivo"
 with open('endpoints.csv', 'r') as arquivo:
@@ -18,19 +19,24 @@ with open('endpoints.csv', 'r') as arquivo:
         print "Conectando em: " + endpoint["Nome"]
         with requests.Session() as s:
             r = s.get('http://' + endpoint["ip"] + '/getxml?location=/Status/SystemUnit/State', auth=(login,passwd))
-        xml = xmltodict.parse(r.text)
-        actives = xml['Status']['SystemUnit']['State']['NumberOfActiveCalls']
-        progress = xml['Status']['SystemUnit']['State']['NumberOfInProgressCalls']
-        suspended = xml['Status']['SystemUnit']['State']['NumberOfSuspendedCalls']
-        total = int(actives) + int(progress) + int(suspended)
-        print "Chamadas ativas: " + actives
-        print "Chamadas em progresso: " + progress
-        print "Chamadas suspensas: " + suspended
-        print "Total de chamadas: " + str(total)
-        if total == 0:
-            print "Ok, you can place a new call"
-        else:
-            print "Endpoitn already in a call, try again later"
+            xml = xmltodict.parse(r.text)
+            actives = xml['Status']['SystemUnit']['State']['NumberOfActiveCalls']
+            progress = xml['Status']['SystemUnit']['State']['NumberOfInProgressCalls']
+            suspended = xml['Status']['SystemUnit']['State']['NumberOfSuspendedCalls']
+            total = int(actives) + int(progress) + int(suspended)
+            #print "Chamadas ativas: " + actives
+            #print "Chamadas em progresso: " + progress
+            #print "Chamadas suspensas: " + suspended
+            #print "Total de chamadas: " + str(total)
+            if total == 0:
+                print "Ok, placing a new call"
+                mydict = { 'Command': { 'Dial': { 'Number': destination, }}}
+                dicttoxml = xmltodict.unparse(mydict)
+                headers = {'Content-Type': 'text/xml'}
+                s.post('http://' + endpoint["ip"] + '/putxml', data=dicttoxml, headers=headers,auth=(login,passwd))
+
+            else:
+                print "Endpoint already in a call, try again later"
 
 
 print "Completed!"
