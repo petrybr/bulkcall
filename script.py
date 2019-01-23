@@ -2,18 +2,26 @@
 import requests
 from requests.auth import HTTPBasicAuth
 import getpass
+import csv
 
-ENDPOINT_IP = "192.168.250.66"
 
 login = raw_input("Login: ")
 passwd = getpass.getpass('Senha: ')
-print "Entrando no with"
 
-with requests.Session() as s:
-    r = s.get('http://192.168.250.66/getxml?location=/Status/Call/Status', auth=(login,passwd))
+print "Abrindo arquivo"
+with open('endpoints.csv', 'r') as arquivo:
+    print "Processando arquivo"
+    endpoints = csv.DictReader(arquivo)
+
+print "Atuando nos endpoints"
+for endpoint in endpoints:
+    print "Conectando em: " + endpoint["Nome"]
+    with requests.Session() as s:
+        r = s.get('http://' + endpoint["ip"] + '/getxml?location=/Status/SystemUnit/State', auth=(login,passwd))
     print r.text
 
-print "Sai do with"
+print "Completed!"
+
 # verificar lista dos endpoints
 # perguntar por username e senha
 # conectar em cada um dos endpoints
