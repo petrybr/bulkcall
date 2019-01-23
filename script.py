@@ -25,14 +25,14 @@ with open('endpoints.csv', 'r') as arquivo:
             #print "Chamadas suspensas: " + suspended
             #print "Total de chamadas: " + str(total)
             if total == 0:
-                print "Ok, placing a new call"
+                print "Dialing to " + destination + "from " + endpoint["Nome"]
                 mydict = { 'Command': { 'Dial': { 'Number': destination, }}}
                 dicttoxml = xmltodict.unparse(mydict)
                 headers = {'Content-Type': 'text/xml'}
                 s.post('http://' + endpoint["ip"] + '/putxml', data=dicttoxml, headers=headers,auth=(login,passwd))
 
             else:
-                print "Endpoint already in a call: " + endpoint["Nome"]
+                print "Endpoint " + endpoint["Nome"] + " already in a call"
 
 
 print "Completed!"
