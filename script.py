@@ -4,8 +4,8 @@ from requests.auth import HTTPBasicAuth
 import getpass
 import csv
 import xmltodict
-
-
+import time
+inicio = time.time()
 login = raw_input("Login: ")
 passwd = getpass.getpass('Password: ')
 destination = raw_input("Address to call: ")
@@ -33,19 +33,6 @@ with open('endpoints.csv', 'r') as arquivo:
 
             else:
                 print "Endpoint " + endpoint["Nome"] + " already in a call"
-
-
-print "Completed!"
-
-# verificar lista dos endpoints
-# perguntar por username e senha
-# conectar em cada um dos endpoints
-## Abrir sessao
-##  http://<ip-address>/xmlapi/session/begin
-# verificar se ja nao esta em uma chamada
-## se ja estiver, ver o que fazer, alertar? desconectar?
-## se nao estiver, fazer a ligacao
-# fechar sessao com endpoint
-# ter ctz q a sessao foi encerrada com sucesso p evitar problemas
-
-# calcular o tempo total para conectar todos endpoints
+fim = time.time()
+tempo = fim - inicio
+print "Completed in " + str(tempo).split(".")[0] + " seconds!"
