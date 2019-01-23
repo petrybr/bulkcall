@@ -10,13 +10,9 @@ login = raw_input("Login: ")
 passwd = getpass.getpass('Password: ')
 destination = raw_input("Address to call: ")
 
-print "Abrindo arquivo"
 with open('endpoints.csv', 'r') as arquivo:
-    print "Processando arquivo"
     endpoints = csv.DictReader(arquivo)
-    print "Atuando nos endpoints"
     for endpoint in endpoints:
-        print "Conectando em: " + endpoint["Nome"]
         with requests.Session() as s:
             r = s.get('http://' + endpoint["ip"] + '/getxml?location=/Status/SystemUnit/State', auth=(login,passwd))
             xml = xmltodict.parse(r.text)
@@ -36,7 +32,7 @@ with open('endpoints.csv', 'r') as arquivo:
                 s.post('http://' + endpoint["ip"] + '/putxml', data=dicttoxml, headers=headers,auth=(login,passwd))
 
             else:
-                print "Endpoint already in a call, try again later"
+                print "Endpoint already in a call: " + endpoint["Nome"]
 
 
 print "Completed!"
