@@ -1,4 +1,9 @@
 #!/usr/bin/env python2.7
+
+#
+## https://github.com/petrybr/bulkcall
+#
+
 import requests
 from requests.auth import HTTPBasicAuth
 import getpass
@@ -36,3 +41,4 @@ with open('endpoints.csv', 'r') as arquivo:
 fim = time.time()
 tempo = fim - inicio
 print "Completed in " + str(tempo).split(".")[0] + " seconds!"
+raw_input("Press enter to exit")
