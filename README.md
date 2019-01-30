@@ -10,6 +10,7 @@ Uses Python 2.7
 
 Libraries: requests, xmltodict, getpass, csv, time
 
-file endpoints.csv with the Endpoint name and ip address to access
+file endpoints.csv with the Endpoint name, ip address to access, and if it is to connect or not
+endpoints.csv headers: Nome,ip,conectar
 
 Need to have an user at the endpoints with proper roles
