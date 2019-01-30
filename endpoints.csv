@@ -1,3 +1,3 @@
-Nome,ip
-Itaguacu,192.168.250.66
-Meio,192.168.249.26
+Nome,ip,Conectar
+Itaguacu,192.168.250.66,sim
+Meio,192.168.250.100,nao
