@@ -11,4 +11,9 @@ Libraries: requests, xmltodict, getpass, csv, time
 file endpoints.csv with the Endpoint name, ip address to access, and if it is to connect or not
 endpoints.csv headers: Nome,ip,conectar
 
+Nome = name of endpoint
+ip = ip address of endpoint
+conectar = "sim" if it is to connect to this endpoint
+
+
 Need to have an user at the endpoints with proper roles
