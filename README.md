@@ -12,7 +12,9 @@ file endpoints.csv with the Endpoint name, ip address to access, and if it is to
 endpoints.csv headers: Nome,ip,conectar
 
 Nome = name of endpoint
+
 ip = ip address of endpoint
+
 conectar = "sim" if it is to connect to this endpoint
 
 
