@@ -1,0 +1,4 @@
+Name,ip,connect
+New York,192.168.0.100,yes
+Sao Paulo,192.168.150.20,no
+San Francisco, 192.168.30.90,yes
