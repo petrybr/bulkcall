@@ -18,28 +18,24 @@ destination = raw_input("Address to call: ")
 with open('endpoints.csv', 'r') as arquivo:
     endpoints = csv.DictReader(arquivo)
     for endpoint in endpoints:
-        if endpoint["Conectar"] == "sim":
+        if endpoint["Connect"] == "yes":
             with requests.Session() as s:
                 try:
                     r = s.get('http://' + endpoint["ip"] + '/getxml?location=/Status/SystemUnit/State', auth=(login,passwd))
                 except requests.ConnectionError as e:
-                    print "Connection Error - " + endpoint["Nome"]
+                    print "Connection Error - " + endpoint["Name"]
                     continue
                 except requests.Timeout as e:
-                    print "Timeout Error - " + endpoint["Nome"]
+                    print "Timeout Error - " + endpoint["Name"]
                     continue
                 except requests.RequestException as e:
-                    print "General Error - " + endpoint["Nome"]
+                    print "General Error - " + endpoint["Name"]
                     continue
                 xml = xmltodict.parse(r.text)
                 actives = xml['Status']['SystemUnit']['State']['NumberOfActiveCalls']
                 progress = xml['Status']['SystemUnit']['State']['NumberOfInProgressCalls']
                 suspended = xml['Status']['SystemUnit']['State']['NumberOfSuspendedCalls']
                 total = int(actives) + int(progress) + int(suspended)
-                #print "Chamadas ativas: " + actives
-                #print "Chamadas em progresso: " + progress
-                #print "Chamadas suspensas: " + suspended
-                #print "Total de chamadas: " + str(total)
                 if total == 0:
                     print "Dialing to " + destination + " from " + endpoint["Nome"]
                     mydictdial = { 'Command': { 'Dial': { 'Number': destination, }}}
@@ -50,9 +46,9 @@ with open('endpoints.csv', 'r') as arquivo:
                     s.post('http://' + endpoint["ip"] + '/putxml', data=dicttoxmldial, headers=headers,auth=(login,passwd))
                     s.post('http://' + endpoint["ip"] + '/putxml', data=dicttoxmlmute, headers=headers,auth=(login,passwd))
                 else:
-                    print "Endpoint " + endpoint["Nome"] + " already in a call"
+                    print "Endpoint " + endpoint["Name"] + " already in a call"
         else:
-                print "Endpoint " + endpoint["Nome"] + " desativado no arquivo de configuracao (endpoints.csv)."
+                print "Endpoint " + endpoint["Name"] + " is configured to not join this call in endpoints.csv"
 fim = time.time()
 tempo = fim - inicio
 print "Completed in " + str(tempo).split(".")[0] + " seconds!"
