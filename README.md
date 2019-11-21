@@ -1,4 +1,4 @@
-# bulkcall - Remotely start calls in bulk
+# bulkcall - Make 1 or more Cisco Endpoints dial to one specific destination Address
 <!---
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/petrybr/bulkcall)
 -->
