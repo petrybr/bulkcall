@@ -10,10 +10,10 @@ import getpass
 import csv
 import xmltodict
 import time
-inicio = time.time()
 login = raw_input("Login: ")
 passwd = getpass.getpass('Password: ')
 destination = raw_input("Address to call: ")
+inicio = time.time()
 
 with open('endpoints.csv', 'r') as arquivo:
     endpoints = csv.DictReader(arquivo)
@@ -37,7 +37,7 @@ with open('endpoints.csv', 'r') as arquivo:
                 suspended = xml['Status']['SystemUnit']['State']['NumberOfSuspendedCalls']
                 total = int(actives) + int(progress) + int(suspended)
                 if total == 0:
-                    print "Dialing to " + destination + " from " + endpoint["Nome"]
+                    print "Dialing to " + destination + " from " + endpoint["Name"]
                     mydictdial = { 'Command': { 'Dial': { 'Number': destination, }}}
                     mydictmute = { 'Command': { 'Audio': { 'Microphones': { 'Mute': { '@command': 'True'}}}}}
                     dicttoxmldial = xmltodict.unparse(mydictdial)
