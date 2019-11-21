@@ -52,8 +52,12 @@ Then, for each of the endpoints in the list (endpoints.csv), the script will sen
   
   - **connect**: the options here are "yes" or "no". It's just to say to the script if it is to start a call in this endpoint (yes) or no (no). Just to avoid needing to remove the entry if for some reason today you don't need that endpoint to connect to the call (but you may need it tomorrow).
   
+[![endpoints.jpg](https://i.postimg.cc/PJgvZp5m/endpoints.jpg)](https://postimg.cc/jnhjYjN5)
+
 4. Run it!
 
 ```
   python script.py
 ```
+
+[![CUst8s5-OW0.gif](https://i.postimg.cc/XqcjQQK7/CUst8s5-OW0.gif)](https://postimg.cc/p5rMdQ1g)
