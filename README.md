@@ -1,7 +1,7 @@
 # bulkcall - Make 1 or more Cisco Endpoints dial to one specific destination Address
-<!---
+
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/petrybr/bulkcall)
--->
+
 ## Use Case
 
 Imagine you have 37 Cisco Webex Room Kits over different cities and you need them to call to a Webex Personal Room for a meeting, and you need to start these calls remotely without an user doing this manually on site.
